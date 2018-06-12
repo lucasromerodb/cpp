@@ -33,6 +33,12 @@
   font-size: 1rem;
   font-weight: 700;
   color: #fff;
+  cursor: pointer;
+  outline: none;
+}
+
+.InputPrice.is-ready .InputPrice__button {
+  background-color: #00e29b;
 }
 
 .InputPrice__label {
