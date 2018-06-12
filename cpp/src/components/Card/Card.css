@@ -1,20 +1,23 @@
-.Box {
+.Card {
   width: 100%;
-  background-color: #fff;
   box-sizing: border-box;
   padding: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   border-radius: 20px;
+}
+
+.Card_white {
+  background-color: #fff;
   box-shadow: 0 10px 10px -5px rgb(194,201,201, 0.4)
 }
 
-.Box__header {
+.Card__header {
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
-.Box__checkbox {
+.Card__checkbox {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,24 +29,24 @@
   text-align: center;
   color: #fff;
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
-.Box.is-enabled .Box__checkbox {
+.Card.is-enabled .Card__checkbox {
   background-color: #00e29b;
 }
 
-.Box__title {
+.Card__title {
   font-size: 1.3rem;
   font-weight: 700;
   color: #c2c9c9;
 }
 
-.Box.is-enabled .Box__title {
+.Card.is-enabled .Card__title {
   color: #003ec8;
 }
 
-.Box__description {
+.Card__description {
   color: #c2c9c9;
   line-height: 1.25;
 }

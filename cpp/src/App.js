@@ -1,30 +1,32 @@
 import React, { Component } from 'react';
-import { Box } from './components/Box/Box';
+import { InputPrice } from './components/InputPrice/InputPrice';
+import { Card } from './components/Card/Card';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Box
-          icon="A"
+        <InputPrice/>
+        {/* <Card
+          icon="hashtag"
           title="Compra regular"
         >
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa eos, ipsa, neque quia dolores deserunt, ullam doloremque assumenda quidem harum repudiandae ut aliquam laborum, corporis est pariatur enim porro eveniet.
-        </Box>
-        <Box
-          icon="A"
+          Los libros no pagan impuestos del 50%.
+        </Card>
+        <Card
+          icon="book-open"
           title="Compra regular"
         >
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa eos, ipsa, neque quia dolores deserunt, ullam doloremque assumenda quidem harum repudiandae ut aliquam laborum, corporis est pariatur enim porro eveniet.
-        </Box>
-        <Box
-          icon="A"
+  				Si es tu primer compra del año, los impuestos del 50% tienen una bonificación de US$ 25 sobre el total de la compra (precio + envío).
+        </Card>
+        <Card
+          icon="truck"
           title="Compra regular"
           enabled="is-enabled"
         >
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa eos, ipsa, neque quia dolores deserunt, ullam doloremque assumenda quidem harum repudiandae ut aliquam laborum, corporis est pariatur enim porro eveniet.
-        </Box>
+				  El costo del envío forma parte del total de la compra. Es importante para calcular el impuesto del VEP.
+        </Card> */}
       </div>
     );
   }
