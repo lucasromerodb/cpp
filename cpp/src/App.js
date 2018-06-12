@@ -1,14 +1,16 @@
-import React, { Component } from 'react';
-import { InputPrice } from './components/InputPrice/InputPrice';
-import { Card } from './components/Card/Card';
-import './App.css';
+import React, { Component } from 'react'
+import { InputPrice } from './components/InputPrice/InputPrice'
+import { Card } from './components/Card/Card'
+import { DolarPrice } from './components/DolarPrice/DolarPrice'
+import './App.css'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <InputPrice/>
-        {/* <Card
+        <DolarPrice/>
+        <Card
           icon="hashtag"
           title="Compra regular"
         >
@@ -26,7 +28,7 @@ class App extends Component {
           enabled="is-enabled"
         >
 				  El costo del envío forma parte del total de la compra. Es importante para calcular el impuesto del VEP.
-        </Card> */}
+        </Card>
       </div>
     );
   }
