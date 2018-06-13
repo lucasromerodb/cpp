@@ -7,25 +7,23 @@ export class Card extends Component {
     super(props)
     this.state = {
       active: false,
-      status: this.props.status
+      // status: this.props.status
     }
   }
 
   _handleActive = () => {
-    this.setState(prevState => ({
-      active: !prevState.active,
-      status: !prevState.status
-     }))
-  }
-
-  componentDidUpdate() {
-    console.log(this.props.titleTrue, this.state.active, this.state.status);
+    this.setState(prevState => ({ active: !prevState.active, }))
+    this.props.status(this.props.idCard)
   }
 
   render() {
     return (
       <div className={ this.state.active ? "Card Card_white is-enabled" : "Card Card_white" }>
-        <div className="Card__header" id={this.props.idCard} onClick={this._handleActive} >
+        <div
+          className="Card__header"
+          id={this.props.idCard}
+          onClick={this._handleActive}
+        >
           <div className="Card__checkbox">
             <i className={`fas fa-${this.props.icon}`}></i>
           </div>

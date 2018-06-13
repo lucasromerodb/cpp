@@ -8,14 +8,16 @@ const url = `https://openexchangerates.org/api/latest.json?app_id=${appId}`
 export class DolarPrice extends Component {
   constructor(props) {
     super(props)
-    this.state = { dolar: 0 }
+    this.state = { currency: 0 }
   }
 
-  _getCurrency() {
+  _getCurrency = () => {
     axios
       .get(url)
-      .then(currency => {
-        this.setState({ dolar: currency.data.rates.ARS })
+      .then(response => {
+        const currency = response.data.rates.ARS
+        this.props.getCurrency(currency)
+        this.setState({ currency })
       })
   }
 
@@ -26,7 +28,7 @@ export class DolarPrice extends Component {
   render () {
     return (
       <div className="DolarPrice">
-        <i>USD</i> 1 = <i>ARS</i> {this.state.dolar.toFixed(2)}
+        <i>USD</i> 1 = <i>ARS</i> {this.state.currency.toFixed(2)}
       </div>
     )
   }
