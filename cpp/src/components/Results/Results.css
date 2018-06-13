@@ -1,0 +1,10 @@
+.Results__title {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 700;
+  opacity: 0.8;
+}
+
+.Results__converted {
+  margin: 0;
+}

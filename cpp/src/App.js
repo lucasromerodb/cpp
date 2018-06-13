@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { InputPrice } from './components/InputPrice/InputPrice'
 import { Card } from './components/Card/Card'
 import { DolarPrice } from './components/DolarPrice/DolarPrice'
+import { Results } from './components/Results/Results'
 import './App.css'
 
 class App extends Component {
@@ -10,14 +11,14 @@ class App extends Component {
     super()
     this.state = {
       firstPurchase: false,
-      bookPurchase: true,
+      bookPurchase: false,
       shippingIncluded: false
     }
   }
 
-  _changeCardState = (stateName) => {
-    console.log(stateName, null);
-    this.setState(prevState => { stateName: !prevState.stateName })
+  componentDidMount() {
+    document.getElementById('firstPurchase').click()
+    document.getElementById('shippingIncluded').click()
   }
 
   render() {
@@ -25,35 +26,36 @@ class App extends Component {
       <div className="App">
         <InputPrice/>
         <DolarPrice/>
+        <Results/>
         <Card
           enabled={ this.state.firstPurchase && "is-enabled" }
+          idCard="firstPurchase"
           icon="hashtag"
-          // onClick={ this._changeCardState('firstPurchase') }
-          // title={ this.state.firstPurchase ? "Es mi primer compra" : "Ya compré antes" }
+          status={ this.state.firstPurchase }
           titleTrue="Es mi primer compra"
           titleFalse="Ya compré antes"
         >
           Los libros no pagan impuestos del 50%.
         </Card>
         <Card
+          enabled={ this.state.shippingIncluded && 'is-enabled' }
+          idCard="shippingIncluded"
+          icon="truck"
+          status={ this.state.bookPurchase }
+          titleTrue="Envío incluido"
+          titleFalse="Pagaré el envío"
+        >
+				  El costo del envío forma parte del total de la compra. Es importante para calcular el impuesto del VEP.
+        </Card>
+        <Card
           enabled={ this.state.bookPurchase && 'is-enabled' }
+          idCard="bookPurchase"
           icon="book-open"
-          // onClick={ this._changeCardState('bookPurchase') }
-          // title={ this.state.bookPurchase ? "Es un libro" : "Es un producto" }
+          status={ this.state.bookPurchase }
           titleTrue="Es un libro"
           titleFalse="Es un producto"
         >
   				Si es tu primer compra del año, los impuestos del 50% tienen una bonificación de US$ 25 sobre el total de la compra (precio + envío).
-        </Card>
-        <Card
-          enabled={ this.state.shippingIncluded && 'is-enabled' }
-          icon="truck"
-          // onClick={ this._changeCardState('shippingIncluded') }
-          // title={ this.state.shippingIncluded ? "El envío está incluido" : "Tengo que pagar el envío" }
-          titleTrue="El envío está incluido"
-          titleFalse="Pagaré el envío"
-        >
-				  El costo del envío forma parte del total de la compra. Es importante para calcular el impuesto del VEP.
         </Card>
       </div>
     );

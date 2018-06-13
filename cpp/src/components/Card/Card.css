@@ -11,10 +11,17 @@
   box-shadow: 0 10px 10px -5px rgb(194,201,201, 0.4)
 }
 
+.Card_green {
+  background-color: #00e29b;
+  box-shadow: 0 10px 10px -5px rgb(194,201,201, 0.4);
+  color: #fff;
+}
+
 .Card__header {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  cursor: pointer;
 }
 
 .Card__checkbox {
@@ -24,24 +31,33 @@
   height: 50px;
   width: 50px;
   margin-right: 20px;
-  background-color: #c2c9c9;
+  /* background-color: #c2c9c9; */
+  background-color: transparent;
   border-radius: 25px;
+  box-shadow: inset 0 0 0 2px #c2c9c9;
   text-align: center;
-  color: #fff;
+  color: #c2c9c9;
   font-weight: 700;
   font-size: 1rem;
-  cursor: pointer;
+
+  transition: background-color 0.3s ease, box-shadow 0.8s ease, color 0.8s ease
+}
+
+.Card__header:hover .Card__checkbox {
+  box-shadow: inset 0 0 0 3px #00e29b;
+  color: #00e29b;
 }
 
 .Card.is-enabled .Card__checkbox {
   background-color: #00e29b;
+  box-shadow: inset 0 0 0 0 transparent;
+  color: #fff;
 }
 
 .Card__title {
   font-size: 1.3rem;
   font-weight: 700;
   color: #c2c9c9;
-  cursor: pointer;
 }
 
 .Card.is-enabled .Card__title {
