@@ -6,14 +6,14 @@ export class Card extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      active: false,
-      // status: this.props.status
+      active: false
     }
   }
 
   _handleActive = () => {
-    this.setState(prevState => ({ active: !prevState.active, }))
-    this.props.status(this.props.idCard)
+    this.props.updatePrice()
+    this.props.setCardStatus(this.props.idCard)
+    this.setState(prevState => ({ active: !prevState.active }))
   }
 
   render() {

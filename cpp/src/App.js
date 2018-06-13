@@ -22,6 +22,7 @@ class App extends Component {
   }
 
   _setCardStatus = (id) => {
+    this.setState({ priceConverted: this._converted() })
     this.setState(prevState =>({ [id]: !prevState[id] }))
   }
 
@@ -34,24 +35,30 @@ class App extends Component {
   }
 
   _startConversion = () => {
-    console.log('Convirtiendo...')
+    console.log('Convirtiendo...', this._converted())
+    this.setState({ priceConverted: this._converted() })
+  }
+
+  _converted() {
+    const { currencyPrice, userInputPrice, userInputShipping, firstPurchase, bookPurchase } = this.state
 
     const taxQty = 50 // porcentaje de impuesto
-    const foreignCurrency = this.state.currencyPrice // obtengo el precio obtenido por axios
+    const foreignCurrency = currencyPrice // obtengo el precio obtenido por axios
 
-    const product = Number(this.state.userInputPrice) // precio del producto
-    const shipping = Number(this.state.userInputShipping) // costo del envío
-    const franchise = this.state.firstPurchase === true ? 25 : 0 // franquicia anual que otorga la AFIP
-    const courier = ( this.state.bookPurchase || product === 0 ) ? 0 : 120 // envío por Correo Argentino
+    const product = Number(userInputPrice) // precio del producto
+    const shippingPrice = Number(userInputShipping) // costo del envío
+    const franchise = firstPurchase ? 25 : 0 // franquicia anual que otorga la AFIP
+    const courier = ( bookPurchase || product === 0 ) ? 0 : 120 // envío por Correo Argentino
 
-    const price = product + shipping // el total de la compra es la suma del precio del producto y el envío
+    const price = product + shippingPrice // el total de la compra es la suma del precio del producto y el envío
     const priceDiscounted = ( ( price - franchise ) < 0) ? 0 : price - franchise // descuento un valor si realmente hay franquicia
 
-    const tax = this.state.bookPurchase ? 0 : priceDiscounted * ( taxQty / 100 ) // tipo de producto (si es un libro no lleva inpuestos)
+    const tax = bookPurchase ? 0 : priceDiscounted * ( taxQty / 100 ) // tipo de producto (si es un libro no lleva inpuestos)
 
     const converted = ( price + tax ) * foreignCurrency + courier // conversión final
 
-    this.setState({ priceConverted: converted })
+    return converted
+
   }
 
   componentDidMount() {
@@ -72,9 +79,10 @@ class App extends Component {
           enabled={ this.state.firstPurchase && "is-enabled" }
           idCard="firstPurchase"
           icon="hashtag"
-          status={ this._setCardStatus }
+          setCardStatus={ this._setCardStatus }
           titleTrue="Es mi primer compra"
           titleFalse="Ya compré antes"
+          updatePrice={this._startConversion}
         >
           <p>
             Los libros no pagan impuestos del 50%.
@@ -84,22 +92,24 @@ class App extends Component {
           enabled={ this.state.shippingIncluded && 'is-enabled' }
           idCard="shippingIncluded"
           icon="truck"
-          status={ this._setCardStatus }
+          setCardStatus={ this._setCardStatus }
           titleTrue="Envío incluido"
           titleFalse="Pagaré el envío"
+          updatePrice={this._startConversion}
         >
           <p>
             El costo del envío forma parte del total de la compra. Es importante para calcular el impuesto del VEP.
           </p>
-          {this.state.shippingIncluded && <InputShipping/>}
+          {!this.state.shippingIncluded && <InputShipping/>}
         </Card>
         <Card
           enabled={ this.state.bookPurchase && 'is-enabled' }
           idCard="bookPurchase"
           icon="book-open"
-          status={ this._setCardStatus }
+          setCardStatus={ this._setCardStatus }
           titleTrue="Es un libro"
           titleFalse="Es un producto"
+          updatePrice={this._startConversion}
         >
           <p>
             Si es tu primer compra del año, los impuestos del 50% tienen una bonificación de US$ 25 sobre el total de la compra (precio + envío).
