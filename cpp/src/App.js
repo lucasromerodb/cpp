@@ -3,6 +3,7 @@ import { InputPrice } from './components/InputPrice/InputPrice'
 import { Card } from './components/Card/Card'
 import { DolarPrice } from './components/DolarPrice/DolarPrice'
 import { Results } from './components/Results/Results'
+import { InputShipping } from './components/InputShipping/InputShipping'
 import './App.css'
 
 class App extends Component {
@@ -75,7 +76,9 @@ class App extends Component {
           titleTrue="Es mi primer compra"
           titleFalse="Ya compré antes"
         >
-          Los libros no pagan impuestos del 50%.
+          <p>
+            Los libros no pagan impuestos del 50%.
+          </p>
         </Card>
         <Card
           enabled={ this.state.shippingIncluded && 'is-enabled' }
@@ -85,7 +88,10 @@ class App extends Component {
           titleTrue="Envío incluido"
           titleFalse="Pagaré el envío"
         >
-				  El costo del envío forma parte del total de la compra. Es importante para calcular el impuesto del VEP.
+          <p>
+            El costo del envío forma parte del total de la compra. Es importante para calcular el impuesto del VEP.
+          </p>
+          {this.state.shippingIncluded && <InputShipping/>}
         </Card>
         <Card
           enabled={ this.state.bookPurchase && 'is-enabled' }
@@ -95,7 +101,9 @@ class App extends Component {
           titleTrue="Es un libro"
           titleFalse="Es un producto"
         >
-  				Si es tu primer compra del año, los impuestos del 50% tienen una bonificación de US$ 25 sobre el total de la compra (precio + envío).
+          <p>
+            Si es tu primer compra del año, los impuestos del 50% tienen una bonificación de US$ 25 sobre el total de la compra (precio + envío).
+          </p>
         </Card>
       </div>
     );

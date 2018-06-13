@@ -31,9 +31,9 @@ export class Card extends Component {
             {this.state.active ? this.props.titleTrue : this.props.titleFalse}
           </div>
         </div>
-        <p className="Card__description">
+        <div className="Card__description">
           {this.props.children}
-        </p>
+        </div>
       </div>
     )
   }
